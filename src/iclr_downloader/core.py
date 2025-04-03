@@ -54,7 +54,7 @@ class Paper:
             keywords=content["keywords"] if use_v1 else content["keywords"]["value"],
             tldr=content.get("one-sentence_summary", None)
             if use_v1
-            else content["TLDR"].get("value", None),
+            else content.get("TLDR", {}).get("value", None),
             abstract=content["abstract"] if use_v1 else content["abstract"]["value"],
             primary_area=None if use_v1 else content["primary_area"]["value"],
             venue=content["venue"] if use_v1 else content["venue"]["value"],
