@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any
+from typing import Any, cast
 from urllib.parse import urljoin
 
 import openreview
@@ -45,7 +45,7 @@ class Paper:
     def from_note(cls, note: Note, year: int, use_v1: bool) -> "Paper":
         content = note.content
         return cls(
-            id=content["paperhash"] if use_v1 else content["paperhash"]["value"],
+            id=cast(str, note.id),
             title=content["title"] if use_v1 else content["title"]["value"],
             authors=content["authors"] if use_v1 else content["authors"]["value"],
             author_ids=content["authorids"]
